@@ -1,0 +1,13 @@
+Source: poweriso
+Section: admin
+Priority: extra
+Maintainer: Zen aka Chibiko <zenogears.aka@gmail.com>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.8.4
+Homepage: http://flant.ru
+
+Package: poweriso
+Architecture: all
+Depends: zenity
+Description: poweriso.
+ 

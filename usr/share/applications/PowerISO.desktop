@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=PowerISO
+Comment=PowerISO
+TryExec=PowerISO
+Exec=PowerISO
+Icon=PowerISO
+Type=Application
+Categories=Utility;

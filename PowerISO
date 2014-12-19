@@ -1,0 +1,118 @@
+#!/bin/bash
+
+##Смотрим конфиг. Если его нет, то назначаем ефолтной директорией домашний каталог
+if [ -f ~/.config/poweriso.conf ]; then
+    DEFAULTDIR=$(cat ~/.config/poweriso.conf)
+  else
+    DEFAULTDIR="/home/$USER/"
+fi
+
+mywork="nya"
+
+while [ "$mywork" != "" ]
+do
+
+mywork=$(zenity --list --radiolist --width=350 --height=225 --window-icon=$wherescriptis/icon.ico \
+       --column="" --column="Выберите действие" \
+       "" "Конвертирование образа" \
+       "" "Распаковка образа" \
+       "" "Выбрать директорию по умолчанию"\
+       "" "Выход" )
+       echo "$mywork"
+case $mywork in
+    "Конвертирование образа" ) 
+       FILEISO=$(zenity --file-selection --filename="$DEFAULTDIR/" --title="Выберите образ для конвертации")
+
+       case $FILEISO in
+         0)
+                echo "$FILEISO выбран."
+                                               
+         ;;
+         
+         1)
+                echo "Не выбран."
+                exit 0
+         ;;
+        -1)
+                echo "Ошибко."
+                exit 0
+         ;;
+        esac
+        
+        DIRNEWISO=$(zenity --file-selection  --filename="$FILEISO" --directory --title="Выберите директорию куда будем сохранять образ")
+                case $DIRNEWISO in
+                0) echo "$DIRNEWISO выбран."
+                ;;
+                1)
+                echo "Не выбран."
+                exit 0
+                ;;
+                esac
+    ISOFORMAT=$(zenity --list --radiolist --height=310 --window-icon=$wherescriptis/icon.ico \
+                   --column="" --column="Выберите формат конвертации" \
+                   "" "iso" \
+                   "" "bin" \
+                   "" "mdf" \
+                   "" "nrg" \
+                   "" "daa"\
+                   "" "img")
+                     case $ISOFORMAT in
+                     iso)
+                     DISKFORMAT="iso"
+                     ;;
+                     bin)
+                     DISKFORMAT="bin"
+                     ;;
+                     mdf)
+                     DISKFORMAT="mdf"
+                     ;;
+                     nrg)
+                     DISKFORMAT="nrg"
+                     ;;
+                     img)
+                     DISKFORMAT="img"
+                     ;;
+                     daa)
+                     DISKFORMAT="daa"
+                     ;;
+                     "")
+                     echo "Не выбран."
+                     exit 0
+                     ;;
+                     *)
+                     exit 0
+                     ;;
+                     esac
+                   FILENAME=$(basename "$FILEISO" |awk -F"." '{print $1}')
+                     zenity --question --title="Подтвердите действия" --text="Образ\n $FILEISO\n конвертируем в\n $DIRNEWISO/$FILENAME.$DISKFORMAT"
+                     if [ $? -eq "0" ]; then
+                     ##В идеале сделать проверку на файлы в директории
+                      find "$DIRNEWISO" -name "*cue" -exec rm -rf {} \;
+                    /usr/sbin/poweriso convert "$FILEISO" -o "$DIRNEWISO"/"$FILENAME"."$DISKFORMAT" -ot "$DISKFORMAT"| tee >(zenity --progress --text="прогресс" --pulsate --auto-close)
+                    fi
+      
+    ;;
+
+    "Распаковка образа" )
+      #выбрать диск file-selection
+      #выбрать куда
+      zenity --error --text="Ещё не реализовано"
+      exit 0
+    ;;
+    "Выбрать директорию по умолчанию" )
+     DEFAULTDIR=$(zenity --file-selection --directory --title="Выберите директорию с образами")
+     echo "$DEFAULTDIR" > ~/.config/poweriso.conf
+    ;;
+    "Выход" )
+    exit 0
+    ;;
+
+    "" )
+    echo "до свидания!"
+    ;;
+    
+    * ) zenity --error --text="Непредвиденная ошибка"
+    ;;
+
+esac
+done
