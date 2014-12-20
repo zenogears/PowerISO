@@ -1,3 +1,9 @@
+poweriso (0.2-ubuntu6) trusty; urgency=medium
+
+  * Options menu
+
+ -- Zen <zen@homehaven>  Sun, 21 Dec 2014 01:44:21 +0300
+
 poweriso (0.2-ubuntu5) trusty; urgency=medium
 
   * Updates, functions!

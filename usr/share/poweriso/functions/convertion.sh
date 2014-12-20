@@ -18,6 +18,7 @@ where_is_dir_for_iso() {
         0) ;;
         "") continue;;
     esac
+    DEFAULTDIR=$DIRNEWISO
 }
 
 try_to_convert() {

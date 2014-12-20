@@ -19,6 +19,8 @@ if [ $(cat ~/.config/poweriso.conf |grep RU)  ]; then
   ERROR="Непредвиденная ошибка"
   DIREXTISO="Выберите директорию для распаковки"
   NORTIFICATION="Внимание!"
+  BACK="Назад"
+  OPTIONS="Настройки"
 else
   CHOOSE_ACTION="Select an action"
   LANGG="Change language (Need restart)"
@@ -38,4 +40,6 @@ else
   ERROR="ERROR!!!"
   DIREXTISO="Choose directory for extraction"
   NORTIFICATION="Message:"
+  BACK="Back"
+  OPTIONS="Options"
 fi
