@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 ## Looking for config-files
 if [ ! -f ~/.config/poweriso.conf ]; then
     touch ~/.config/poweriso.conf
@@ -33,52 +31,37 @@ ASKFIRST=$(zenity --list --radiolist --width=350 --height=250 --window-icon=/usr
 
 case $ASKFIRST in
     "$CONVERT" )
-          convert_iso_file
-          where_is_dir_for_iso
-          iso_format_func
-          try_to_convert
+        where_iso_file
+        where_is_dir_for_iso
+        iso_format_func
+        try_to_convert
     ;;
 
     "$EXTRACT" )
-       FILEISO=$(zenity --file-selection --filename="$DEFAULTDIR/" --title="$CHOOSE_IMAGE" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
-
-       case $FILEISO in
-         0) ;;
-         "") continue;;
-        esac
-
-        DIREXTISO=$(zenity --file-selection  --filename="$FILEISO" --directory --title="$CHOOSE_DIRECTORY" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
-                case $DIREXTISO in
-                0) ;;
-                "") continue;;
-                esac
-                FILENAME=$(basename "$FILEISO" |awk -F"." '{print $1}')
-                mkdir "$DIREXTISO"/"$FILENAME"
-                poweriso extract "$FILEISO" / -od "$DIREXTISO"/"$FILENAME"| tee >(zenity --progress --text="$PROGRESSBAR" --pulsate --auto-close --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
-                zenity --info --title "$NORTIFICATION" --text "$COMPLETED" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png 
-    ;;
-    "$CHOOSEDEFAULTDIRECTORY" )
-     DEFAULTDIR=$(zenity --file-selection --directory --title="$CHOOSE_IMAGE_DIRECTORY" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
-     sed -i 's/^DEFAU.*//g' ~/.config/poweriso.conf
-     echo "DEFAULTDIR=$DEFAULTDIR" >> ~/.config/poweriso.conf
-    ;;
-    "$EXIT" )
-    exit 0
-    ;;
-    "Change language (Need restart)" )
-    sed -i 's/EN/RU/g' ~/.config/poweriso.conf
-    exit 0
-    ;;
-    "Сменить язык (Нужен перезапуск)" )
-    sed -i 's/RU/EN/g' ~/.config/poweriso.conf
-    exit 0
-    ;;
-    "" )
-    exit 0
+        where_iso_file
+        where_is_dir_for_iso
+        iso_extract_func
     ;;
     
-    * ) zenity --error --text="$ERROR" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png 
+    "$CHOOSEDEFAULTDIRECTORY" )
+        DEFAULTDIR=$(zenity --file-selection --directory --title="$CHOOSE_IMAGE_DIRECTORY" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
+        sed -i 's/^DEFAU.*//g' ~/.config/poweriso.conf
+        echo "DEFAULTDIR=$DEFAULTDIR" >> ~/.config/poweriso.conf
     ;;
-
+    
+    "$EXIT" ) exit 0;;
+    
+    "Change language (Need restart)" )
+        sed -i 's/EN/RU/g' ~/.config/poweriso.conf
+        exit 0
+    ;;
+    
+    "Сменить язык (Нужен перезапуск)" )
+        sed -i 's/RU/EN/g' ~/.config/poweriso.conf
+        exit 0
+    ;;
+    "" ) exit 0;;
+    
+    * ) zenity --error --text="$ERROR" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png ;;
 esac
 done
