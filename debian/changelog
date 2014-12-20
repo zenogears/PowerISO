@@ -1,4 +1,16 @@
-poweriso (0.1-changeme1) changeme; urgency=medium
+poweriso (0.2-ubuntu2) trusty; urgency=medium
+
+  * Little fix
+
+ -- Zen aka Chibiko <zenogears.aka@gmail.com> Sat, 20 Dec 2014 00:53:34 +0300
+
+poweriso (0.2-ubuntu1) trusty; urgency=medium
+
+  * New release?
+
+ -- Zen aka Chibiko <zenogears.aka@gmail.com>  Sat, 20 Dec 2014 00:41:56 +0300
+
+poweriso (0.1-trusty1) trusty; urgency=medium
 
   * Initial release. (Closes: #000001)
 
