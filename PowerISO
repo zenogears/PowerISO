@@ -26,13 +26,13 @@ case $ASKFIRST in
           FILEISO=$(zenity --file-selection --filename="$DEFAULTDIR/" --title="$CHOOSE_IMAGE" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
           case $FILEISO in
             0) ;;
-           "") break;;
+           "") continue;;
           esac
 
           DIRNEWISO=$(zenity --file-selection  --filename="$FILEISO" --directory --title="$CHOOSE_DIRECTORY" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
                 case $DIRNEWISO in
                    0) ;;
-                  "") exit;;
+                  "") continue;;
                 esac
                 
           ISOFORMAT=$(zenity --list --radiolist --height=310 --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png \
@@ -50,8 +50,8 @@ case $ASKFIRST in
                      nrg) DISKFORMAT="nrg";;
                      img) DISKFORMAT="img";;
                      daa) DISKFORMAT="daa";;
-                      "") exit;;
-                       *) exit;;
+                      "") continue;;
+                       *) continue;;
                    esac
                    FILENAME=$(basename "$FILEISO" |awk -F"." '{print $1}')
                      zenity --question --title="$YESNO" --text="$IMAGE\n $FILEISO\n $CONVERTED_IN\n $DIRNEWISO/$FILENAME.$DISKFORMAT" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png
@@ -70,13 +70,13 @@ case $ASKFIRST in
 
        case $FILEISO in
          0) ;;
-         "") exit;;
+         "") continue;;
         esac
 
         DIREXTISO=$(zenity --file-selection  --filename="$FILEISO" --directory --title="$CHOOSE_DIRECTORY" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png )
                 case $DIREXTISO in
                 0) ;;
-                "") exit;;
+                "") continue;;
                 esac
                 FILENAME=$(basename "$FILEISO" |awk -F"." '{print $1}')
                 mkdir "$DIREXTISO"/"$FILENAME"
