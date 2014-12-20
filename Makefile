@@ -15,3 +15,4 @@ install:
 uninstall:
 	rm $(DESTDIR)/usr/sbin/poweriso
 	rm $(DESTDIR)/usr/sbin/PowerISO
+	rm -rf $(DESTDIR)/usr/share/poweriso
