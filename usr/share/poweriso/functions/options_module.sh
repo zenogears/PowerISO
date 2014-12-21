@@ -18,12 +18,14 @@ OPTSMODULE="Options"
     
            "Change language (Need restart)" )
                sed -i 's/EN/RU/g' ~/.config/poweriso.conf
-               exit 0
+               . /usr/share/poweriso/translations/russian
+               break
             ;;
     
             "Сменить язык (Нужен перезапуск)" )
                 sed -i 's/RU/EN/g' ~/.config/poweriso.conf
-                exit 0
+                . /usr/share/poweriso/translations/english
+                break
             ;;
            esac
 done

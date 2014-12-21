@@ -13,7 +13,7 @@ fi
 
 ## Where is functions?
 ## Load Languages:
-. /usr/share/poweriso/translations/translations
+. /usr/share/poweriso/functions/translation.sh
 ## Load convertion func:
 . /usr/share/poweriso/functions/convertion.sh
 ## Load func for format of iso

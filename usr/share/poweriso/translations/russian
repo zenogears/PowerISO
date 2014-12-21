@@ -1,6 +1,5 @@
 #!/bin/bash
 
-if [ $(cat ~/.config/poweriso.conf |grep RU)  ]; then
   CHOOSE_ACTION="Выбери действие"
   LANGG="Сменить язык (Нужен перезапуск)"
   CONVERT="Конвертировать образ"
@@ -21,25 +20,3 @@ if [ $(cat ~/.config/poweriso.conf |grep RU)  ]; then
   NORTIFICATION="Внимание!"
   BACK="Назад"
   OPTIONS="Настройки"
-else
-  CHOOSE_ACTION="Select an action"
-  LANGG="Change language (Need restart)"
-  CONVERT="Convert an image"
-  EXTRACT="Extract an image"
-  CHOOSEDEFAULTDIRECTORY="Choose default directory"
-  EXIT="Exit"
-  CHOOSE_IMAGE="Choose image"
-  CHOOSE_DIRECTORY="Choose directory for converted image"
-  CHOOSE_FORMAT="Choose new image format"
-  YESNO="Confirmation"
-  IMAGE="The image"
-  CONVERTED_IN="trying converted into"
-  PROGRESSBAR="Progressbar"
-  COMPLETED="Working processes with image $FILEISO completed!"
-  CHOOSE_IMAGE_DIRECTORY="Choose directory with images"
-  ERROR="ERROR!!!"
-  DIREXTISO="Choose directory for extraction"
-  NORTIFICATION="Message:"
-  BACK="Back"
-  OPTIONS="Options"
-fi
