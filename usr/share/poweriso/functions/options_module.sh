@@ -16,13 +16,13 @@ OPTSMODULE="Options"
                break
             ;;
 
-           "Change language (Need restart)" )
+           "Change language" )
                sed -i 's/EN/RU/g' ~/.config/poweriso.conf
                . /usr/share/poweriso/translations/russian
                break
             ;;
  
-            "Сменить язык (Нужен перезапуск)" )
+            "Сменить язык" )
                 sed -i 's/RU/EN/g' ~/.config/poweriso.conf
                 . /usr/share/poweriso/translations/english
                 break

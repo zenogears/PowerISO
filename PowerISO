@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sed -i '/^$/d' ~/.config/poweriso.conf
+
 ## Looking for config-files
 if [ ! -f ~/.config/poweriso.conf ]; then
     touch ~/.config/poweriso.conf
