@@ -46,19 +46,19 @@ case $ASKFIRST in
         where_is_dir_for_iso
         iso_extract_func
     ;;
-    
+
     "$CHOOSEDEFAULTDIRECTORY" )
         default_dir_func
     ;;
-    
+
     "$EXIT" ) exit 0;;
-    
+
     "$OPTIONS" )
         options_module_funk
     ;;
-    
+
     "" ) exit 0;;
-    
+
     * ) zenity --error --text="$ERROR" --window-icon=/usr/share/icons/hicolor/16x16/apps/PowerISO.png ;;
 esac
 done
